@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetailMart - Orders</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <h2>🛒 RetailMart</h2>
+
+            <a href="index.html">Dashboard</a>
+            <a href="products.html">Products</a>
+            <a href="customers.html">Customers</a>
+            <a href="inventory.html">Inventory</a>
+            <a href="orders.html">Orders</a>
+            <a href="reports.html">Reports</a>
+        </aside>
+
+        <main class="container">
+
+            <h1>🛒 RetailMart</h1>
+            <h2>Orders</h2>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="🔍 Search orders..."
+            >
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Store</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="orderTable">
+                </tbody>
+            </table>
+
+        </main>
+
+    </div>
+
+    <script src="js/orders.js"></script>
+
+</body>
+</html>

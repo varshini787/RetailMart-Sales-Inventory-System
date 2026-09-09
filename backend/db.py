@@ -9,8 +9,9 @@ load_dotenv(ENV_FILE)
 
 def get_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password=os.getenv("MYSQL_PASSWORD"),
-        database="retailmart"
+        host=os.getenv("MYSQLHOST", "localhost"),
+        port=int(os.getenv("MYSQLPORT", "3306")),
+        user=os.getenv("MYSQLUSER", "root"),
+        password=os.getenv("MYSQLPASSWORD") or os.getenv("MYSQL_PASSWORD"),
+        database=os.getenv("MYSQLDATABASE", "retailmart")
     )

@@ -3,57 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RetailMart - Orders</title>
+    <title>RetailMart | Orders</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <div class="layout">
+<div class="app">
 
-        <aside class="sidebar">
-            <h2>🛒 RetailMart</h2>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-            <a href="index.html">Dashboard</a>
-            <a href="products.html">Products</a>
-            <a href="customers.html">Customers</a>
-            <a href="inventory.html">Inventory</a>
-            <a href="orders.html">Orders</a>
-            <a href="reports.html">Reports</a>
-        </aside>
+        <div class="logo">
+            <span>🛒</span>
+            <h2>RetailMart</h2>
+        </div>
 
-        <main class="container">
+        <nav class="sidebar-nav">
 
-            <h1>🛒 RetailMart</h1>
-            <h2>Orders</h2>
+            <a href="index.html" class="nav-item">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </a>
 
-            <input
-                type="text"
-                id="search"
-                placeholder="🔍 Search orders..."
-            >
+            <a href="products.html" class="nav-item">
+                <span>📦</span>
+                <span>Products</span>
+            </a>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Store</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+            <a href="inventory.html" class="nav-item">
+                <span>📊</span>
+                <span>Inventory</span>
+            </a>
 
-                <tbody id="orderTable">
-                </tbody>
-            </table>
+            <a href="orders.html" class="nav-item active">
+                <span>🧾</span>
+                <span>Orders</span>
+            </a>
 
-        </main>
+            <a href="customers.html" class="nav-item">
+                <span>👥</span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-item">
+                <span>🚚</span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <span>📈</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="settings.html" class="nav-item">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+
+            <a href="login.html" class="nav-item logout">
+                <span>🚪</span>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+        <header class="top-header">
+
+            <div class="mobile-logo">
+                🛒 RetailMart
+            </div>
+
+            <div class="header-search">
+                <span>🔍</span>
+                <input type="text" placeholder="Search anything...">
+            </div>
+
+            <div class="header-right">
+
+                <button class="icon-btn" title="Notifications">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="admin-profile">
+                    <div class="admin-avatar">A</div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <small>RetailMart</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ORDERS CONTENT -->
+        <section class="dashboard">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1>Orders Management</h1>
+                    <p>Track, manage, and process customer orders across retail stores</p>
+                </div>
+
+                <div class="header-actions">
+                    <button class="primary-btn" onclick="openAddOrderModal()">
+                        <span>➕</span> New Order
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon">🧾</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Total Orders</span>
+                        <h2 id="totalOrders">0</h2>
+                        <p>All recorded orders</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Completed</span>
+                        <h2 id="completedOrders">0</h2>
+                        <p class="positive">Fulfilled orders</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Pending / In Progress</span>
+                        <h2 id="pendingOrders">0</h2>
+                        <p style="color: #d97706;">Awaiting fulfillment</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Total Revenue</span>
+                        <h2 id="totalSales">₹0.00</h2>
+                        <p class="positive">Completed sales</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- TABLE CARD -->
+            <div class="dashboard-card">
+
+                <div class="toolbar">
+
+                    <div class="filter-group">
+
+                        <div class="search-container">
+                            <input
+                                type="text"
+                                id="searchInput"
+                                class="search-input"
+                                placeholder="Search by order ID, customer, or store..."
+                            >
+                        </div>
+
+                        <select id="statusFilter">
+                            <option value="ALL">All Status</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div id="message" class="message"></div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Store</th>
+                                <th>Date</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="ordersTable">
+                            <tr>
+                                <td colspan="7" class="loading">Loading orders...</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- CREATE ORDER MODAL -->
+<div id="orderModal" class="modal">
+
+    <div class="modal-content" style="max-width: 650px;">
+
+        <div class="modal-header">
+            <h2>Create New Order</h2>
+            <button class="close" onclick="closeOrderModal()">&times;</button>
+        </div>
+
+        <form id="orderForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="customerId">Customer *</label>
+                    <select id="customerId" required>
+                        <option value="">Select Customer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="storeId">Store Location *</label>
+                    <select id="storeId" required>
+                        <option value="">Select Store</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="orderStatus">Initial Status</label>
+                <select id="orderStatus">
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                </select>
+            </div>
+
+            <div style="margin: 20px 0 10px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 15px; font-weight: 700; color: #111827;">Order Items</h3>
+                <button type="button" class="secondary-btn" style="padding: 6px 12px; font-size: 13px;" onclick="addProductRow()">
+                    + Add Product
+                </button>
+            </div>
+
+            <div id="orderItems"></div>
+
+            <div style="margin-top: 15px; padding: 12px; background: #f9fafb; border-radius: 8px; text-align: right;">
+                <span style="font-size: 14px; color: #6b7280; margin-right: 8px;">Calculated Total:</span>
+                <strong id="orderTotal" style="font-size: 18px; color: #2563eb;">₹0.00</strong>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" onclick="closeOrderModal()">Cancel</button>
+                <button type="submit" class="save-btn">Place Order</button>
+            </div>
+
+        </form>
 
     </div>
 
-    <script src="js/orders.js"></script>
+</div>
+
+
+<!-- VIEW ORDER MODAL -->
+<div id="detailsModal" class="modal">
+
+    <div class="modal-content" style="max-width: 650px;">
+
+        <div class="modal-header">
+            <h2>Order Details</h2>
+            <button class="close" onclick="closeDetailsModal()">&times;</button>
+        </div>
+
+        <div id="orderDetails">
+            <p class="loading">Loading order details...</p>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="secondary-btn" onclick="closeDetailsModal()">Close</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/orders.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetailMart - Smart Retail Management | Admin Login</title>
+
+    <!-- Google Fonts: Modern SaaS Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ================= RESET & DESIGN TOKENS ================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --brand-navy: #0b111c;
+            --brand-navy-card: rgba(17, 24, 39, 0.75);
+            --brand-navy-border: rgba(255, 255, 255, 0.08);
+            --brand-blue: #2563eb;
+            --brand-blue-hover: #1d4ed8;
+            --brand-blue-light: #eff6ff;
+            --brand-blue-glow: rgba(37, 99, 235, 0.25);
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --border-input: #e2e8f0;
+            --border-input-focus: #2563eb;
+            --bg-right: #ffffff;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--brand-navy);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Two-column Fullscreen Layout */
+        .login-split-container {
+            display: flex;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* ================= LEFT COLUMN: BRANDING & PROMOTION (55%) ================= */
+        .brand-panel {
+            flex: 0 0 55%;
+            width: 55%;
+            background-color: var(--brand-navy);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 56px 64px 44px 64px;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Ambient Glow & Technical Grid */
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(37, 99, 235, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 82% 82%, rgba(30, 58, 138, 0.22) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .brand-grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 38px 38px;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .brand-header-group {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Logo Upper-Left */
+        .brand-logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            margin-bottom: 44px;
+        }
+
+        .brand-logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        .brand-logo-icon svg {
+            width: 25px;
+            height: 25px;
+        }
+
+        .brand-name-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+        }
+
+        .brand-tag {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: rgba(37, 99, 235, 0.2);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        /* Hero Text */
+        .brand-hero {
+            max-width: 540px;
+        }
+
+        .brand-hero h1 {
+            font-size: 42px;
+            line-height: 1.15;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .brand-hero .heading-accent {
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-hero p {
+            font-size: 16.5px;
+            line-height: 1.6;
+            color: #94a3b8;
+            font-weight: 400;
+            max-width: 480px;
+        }
+
+        /* Subtle Abstract Retail / E-commerce SaaS Visual */
+        .brand-visual-wrapper {
+            position: relative;
+            z-index: 2;
+            margin: 36px 0 24px 0;
+            max-width: 540px;
+        }
+
+        .saas-card-preview {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        /* Card Top Navigation */
+        .preview-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+
+        .store-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .sync-badge {
+            font-size: 11px;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            font-weight: 500;
+        }
+
+        /* Metric Tiles */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .metric-tile {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .metric-tile-title {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-tile-number {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-trend {
+            font-size: 11px;
+            font-weight: 600;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Mini Sales Trend Curve (SVG) */
+        .chart-box {
+            background: rgba(30, 41, 59, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px 14px 10px;
+            margin-bottom: 16px;
+        }
+
+        .chart-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .chart-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+
+        .chart-accent-label {
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: 500;
+        }
+
+        .chart-svg {
+            width: 100%;
+            height: 64px;
+            overflow: visible;
+        }
+
+        /* Inventory Preview Items */
+        .inventory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .inventory-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(30, 41, 59, 0.25);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 12.5px;
+        }
+
+        .inv-item-name {
+            color: #e2e8f0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .inv-item-qty {
+            font-size: 11.5px;
+            color: #10b981;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Floating Micro Badges */
+        .floating-pill {
+            position: absolute;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+            z-index: 3;
+            animation: floatGently 6s ease-in-out infinite alternate;
+        }
+
+        .pill-top-right {
+            top: -14px;
+            right: -14px;
+        }
+
+        .pill-bottom-left {
+            bottom: -14px;
+            left: -12px;
+            animation-delay: -3s;
+        }
+
+        @keyframes floatGently {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .pill-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+
+        .pill-blue {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .pill-emerald {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .pill-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .pill-sub {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* Brand Footer */
+        .brand-footer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748b;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .brand-footer-features {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-feature-item svg {
+            width: 14px;
+            height: 14px;
+            color: #38bdf8;
+        }
+
+
+        /* ================= RIGHT COLUMN: LOGIN FORM (45%) ================= */
+        .form-panel {
+            flex: 0 0 45%;
+            width: 45%;
+            background-color: var(--bg-right);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 40px;
+            position: relative;
+        }
+
+        .form-container-box {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Form Header */
+        .form-header-group {
+            margin-bottom: 32px;
+        }
+
+        /* Optional small brand icon above form */
+        .form-brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 8px;
+            color: var(--brand-blue);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .form-brand-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .form-header-group h2 {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.025em;
+            margin-bottom: 8px;
+        }
+
+        .form-header-group p {
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Login Form Styles */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 14px;
+            width: 18px;
+            height: 18px;
+            color: #94a3b8;
+            pointer-events: none;
+            transition: color 0.2s ease;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 13px 14px 13px 44px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            border: 1px solid var(--border-input);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .login-form input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .login-form input:hover {
+            border-color: #cbd5e1;
+        }
+
+        .login-form input:focus {
+            border-color: var(--border-input-focus);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+            background-color: #ffffff;
+        }
+
+        .input-box:focus-within .field-icon {
+            color: var(--brand-blue);
+        }
+
+        /* Password Toggle */
+        .pwd-toggle-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+
+        .pwd-toggle-btn:hover {
+            color: #475569;
+        }
+
+        .pwd-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Auxiliary Form Options */
+        .form-aux-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+
+        .remember-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #475569;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember-checkbox-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1.5px solid #cbd5e1;
+            accent-color: var(--brand-blue);
+            cursor: pointer;
+        }
+
+        .aux-link {
+            color: var(--brand-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .aux-link:hover {
+            color: var(--brand-blue-hover);
+            text-decoration: underline;
+        }
+
+        /* Blue Primary Login Button */
+        .login-submit-btn {
+            width: 100%;
+            padding: 13px 20px;
+            background-color: var(--brand-blue);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-submit-btn:hover {
+            background-color: var(--brand-blue-hover);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .login-submit-btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Target element for login.js */
+        #loginMessage {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 22px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        /* Enterprise credential helper */
+        .credentials-hint-box {
+            margin-top: 28px;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: 12.5px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .credentials-hint-box code {
+            background: #e2e8f0;
+            color: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .security-guarantee {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* ================= RESPONSIVE BEHAVIOR ================= */
+        @media (max-width: 1100px) {
+            .brand-panel {
+                padding: 44px 40px;
+            }
+
+            .brand-hero h1 {
+                font-size: 36px;
+            }
+
+            .form-panel {
+                padding: 40px 32px;
+            }
+        }
+
+        @media (max-width: 920px) {
+            .login-split-container {
+                flex-direction: column;
+            }
+
+            .brand-panel {
+                flex: none;
+                width: 100%;
+                padding: 44px 32px 36px 32px;
+                min-height: auto;
+            }
+
+            .brand-logo-badge {
+                margin-bottom: 28px;
+            }
+
+            .brand-visual-wrapper {
+                display: none;
+                /* Condense on tablet/mobile for instant form visibility */
+            }
+
+            .brand-footer {
+                display: none;
+            }
+
+            .brand-hero h1 {
+                font-size: 30px;
+                margin-bottom: 12px;
+            }
+
+            .brand-hero p {
+                font-size: 15px;
+            }
+
+            .form-panel {
+                flex: none;
+                width: 100%;
+                min-height: auto;
+                padding: 44px 24px 60px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-panel {
+                padding: 32px 20px 28px 20px;
+            }
+
+            .brand-hero h1 {
+                font-size: 26px;
+            }
+
+            .form-panel {
+                padding: 32px 20px 48px 20px;
+            }
+
+            .form-header-group h2 {
+                font-size: 24px;
+            }
+
+            .form-header-group {
+                margin-bottom: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-split-container">
+
+        <!-- ================= LEFT COLUMN: PROMOTIONAL / BRANDING (55%) ================= -->
+        <section class="brand-panel">
+            <div class="brand-grid-pattern"></div>
+
+            <div class="brand-header-group">
+                <!-- Large Shopping-Cart Logo Upper-Left -->
+                <div class="brand-logo-badge">
+                    <div class="brand-logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </div>
+                    <div class="brand-name-group">
+                        <span class="brand-name">RetailMart</span>
+                        <span class="brand-tag">Enterprise</span>
+                    </div>
+                </div>
+
+                <!-- Hero Headings -->
+                <div class="brand-hero">
+                    <h1><span class="heading-accent">Smart Retail</span><br>Management</h1>
+                    <p>Manage your products, inventory, customers and orders in one place.</p>
+                </div>
+            </div>
+
+            <!-- Abstract Retail / E-Commerce Visual -->
+            <div class="brand-visual-wrapper">
+                <div class="saas-card-preview">
+
+                    <!-- Floating Micro Badge 1 (Top-Right) -->
+                    <div class="floating-pill pill-top-right">
+                        <div class="pill-icon pill-blue">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-title">New Order #4892</div>
+                            <div class="pill-sub">$184.50 · Paid & Shipped</div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Micro Badge 2 (Bottom-Left) -->
+                    <div class="floating-pill pill-bottom-left">
+                        <div class="pill-icon pill-emerald">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-title">Inventory Optimized</div>
+                            <div class="pill-sub">98.4% Stock Availability</div>
+                        </div>
+                    </div>
+
+                    <!-- Top Status Bar -->
+                    <div class="preview-top-bar">
+                        <div class="store-indicator">
+                            <span class="status-dot"></span>
+                            <span>RetailMart Flagship Store</span>
+                        </div>
+                        <span class="sync-badge">Real-time Sync</span>
+                    </div>
+
+                    <!-- Metric Tiles -->
+                    <div class="metric-grid">
+                        <div class="metric-tile">
+                            <div class="metric-tile-title">
+                                <span>Today's Sales</span>
+                                <span class="metric-trend">+24.5%</span>
+                            </div>
+                            <div class="metric-tile-number">$18,450.00</div>
+                        </div>
+                        <div class="metric-tile">
+                            <div class="metric-tile-title">
+                                <span>Active Inventory</span>
+                                <span class="metric-trend">Healthy</span>
+                            </div>
+                            <div class="metric-tile-number">1,420 Items</div>
+                        </div>
+                    </div>
+
+                    <!-- Vector Sales Graph -->
+                    <div class="chart-box">
+                        <div class="chart-meta">
+                            <span class="chart-label">Weekly Order Volume</span>
+                            <span class="chart-accent-label">● 482 Completed</span>
+                        </div>
+                        <svg class="chart-svg" viewBox="0 0 380 64" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="retailGlow" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.45" />
+                                    <stop offset="100%" stop-color="#2563eb" stop-opacity="0.0" />
+                                </linearGradient>
+                                <linearGradient id="retailLine" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#60a5fa" />
+                                    <stop offset="100%" stop-color="#3b82f6" />
+                                </linearGradient>
+                            </defs>
+                            <path
+                                d="M0,48 C40,42 70,18 110,28 C150,38 180,14 220,20 C260,26 300,6 340,14 C360,18 375,8 380,10 L380,64 L0,64 Z"
+                                fill="url(#retailGlow)" />
+                            <path
+                                d="M0,48 C40,42 70,18 110,28 C150,38 180,14 220,20 C260,26 300,6 340,14 C360,18 375,8 380,10"
+                                fill="none" stroke="url(#retailLine)" stroke-width="2.8" stroke-linecap="round" />
+                            <circle cx="220" cy="20" r="3.5" fill="#60a5fa" stroke="#0b111c" stroke-width="2" />
+                            <circle cx="340" cy="14" r="3.5" fill="#3b82f6" stroke="#0b111c" stroke-width="2" />
+                        </svg>
+                    </div>
+
+                    <!-- Inventory Live List -->
+                    <div class="inventory-list">
+                        <div class="inventory-row">
+                            <span class="inv-item-name">📦 Wireless Barcode Scanner Pro</span>
+                            <span class="inv-item-qty">342 In Stock</span>
+                        </div>
+                        <div class="inventory-row">
+                            <span class="inv-item-name">🧾 Thermal POS Paper (50pk)</span>
+                            <span class="inv-item-qty">890 In Stock</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Left Column Footer -->
+            <div class="brand-footer">
+                <span>&copy; 2026 RetailMart Inc.</span>
+                <div class="brand-footer-features">
+                    <div class="footer-feature-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <span>Enterprise Grade Security</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= RIGHT COLUMN: LOGIN FORM (45%) ================= -->
+        <main class="form-panel">
+            <div class="form-container-box">
+
+                <!-- Header -->
+                <div class="form-header-group">
+                    <div class="form-brand-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span>RetailMart Management Portal</span>
+                    </div>
+                    <h2>Welcome back</h2>
+                    <p>Sign in to your RetailMart account</p>
+                </div>
+
+                <!-- FORM: Preserving id="loginForm" and input IDs for login.js -->
+                <form id="loginForm" class="login-form">
+
+                    <!-- Email Field -->
+                    <div class="field-group">
+                        <label for="username">Email Address</label>
+                        <div class="input-box">
+                            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <input type="email" id="username" name="username" placeholder="Enter your email address"
+                                autocomplete="username" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="field-group">
+                        <label for="password">Password</label>
+                        <div class="input-box">
+                            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <input type="password" id="password" name="password" placeholder="Enter your password"
+                                autocomplete="current-password" required>
+                            <button type="button" class="pwd-toggle-btn" id="togglePasswordBtn"
+                                aria-label="Toggle password visibility" tabindex="-1">
+                                <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Auxiliary row -->
+                    <div class="form-aux-row">
+                        <label class="remember-checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="javascript:void(0)" class="aux-link">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="login-submit-btn" id="loginBtn">
+                        <span>Login</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+
+                </form>
+
+                <!-- Feedback Message Container for login.js -->
+                <div id="loginMessage" role="alert"></div>
+
+                <!-- Credentials helper for convenience -->
+                <div class="credentials-hint-box">
+                    <span>💡</span>
+                    <span>Admin email: <code>varshinikudumula06@gmail.com</code></span>
+                </div>
+
+                <!-- Security guarantee footer -->
+                <div class="security-guarantee">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span>Protected by 256-bit SSL encrypted connection</span>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Password visibility toggle script -->
+    <script>
+        const togglePwdBtn = document.getElementById("togglePasswordBtn");
+        const pwdField = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        if (togglePwdBtn && pwdField && eyeIcon) {
+            togglePwdBtn.addEventListener("click", function () {
+                const isPassword = pwdField.getAttribute("type") === "password";
+                pwdField.setAttribute("type", isPassword ? "text" : "password");
+
+                if (isPassword) {
+                    eyeIcon.innerHTML = `
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    `;
+                } else {
+                    eyeIcon.innerHTML = `
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    `;
+                }
+            });
+        }
+    </script>
+
+    <!-- Existing login authentication logic -->
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

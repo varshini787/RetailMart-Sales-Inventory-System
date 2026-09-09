@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RetailMart | Customers</title>
+    <title>RetailMart | Suppliers</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -40,12 +40,12 @@
                 <span>Orders</span>
             </a>
 
-            <a href="customers.html" class="nav-item active">
+            <a href="customers.html" class="nav-item">
                 <span>👥</span>
                 <span>Customers</span>
             </a>
 
-            <a href="suppliers.html" class="nav-item">
+            <a href="suppliers.html" class="nav-item active">
                 <span>🚚</span>
                 <span>Suppliers</span>
             </a>
@@ -108,20 +108,51 @@
         </header>
 
 
-        <!-- CUSTOMERS CONTENT -->
+        <!-- SUPPLIERS CONTENT -->
         <section class="dashboard">
 
             <div class="page-heading">
 
                 <div>
-                    <h1>Customers Management</h1>
-                    <p>View, search, register, and manage retail customers</p>
+                    <h1>Suppliers Directory</h1>
+                    <p>Manage verified vendors, suppliers, and procurement contacts</p>
                 </div>
 
-                <div class="header-actions">
-                    <button class="primary-btn" onclick="openAddModal()">
-                        <span>➕</span> Add Customer
-                    </button>
+                <div class="date-box">
+                    🚚 Vendor Network
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+
+                <div class="stat-card">
+                    <div class="stat-icon">🚚</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Registered Suppliers</span>
+                        <h2 id="totalSuppliers">0</h2>
+                        <p>Procurement partners</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Coverage</span>
+                        <h2>Statewide</h2>
+                        <p class="positive">Active fulfillment</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🤝</div>
+                    <div class="stat-info">
+                        <span class="stat-title">Contract Status</span>
+                        <h2>Active</h2>
+                        <p class="positive">100% compliant</p>
+                    </div>
                 </div>
 
             </div>
@@ -137,13 +168,11 @@
                             type="text"
                             id="search"
                             class="search-input"
-                            placeholder="Search by customer name, email, phone, or city..."
+                            placeholder="Search suppliers by name, contact, or city..."
                         >
                     </div>
 
                 </div>
-
-                <div id="message" class="message"></div>
 
                 <div class="table-wrapper">
 
@@ -151,19 +180,18 @@
 
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>Supplier ID</th>
+                                <th>Supplier Name</th>
+                                <th>Contact Person</th>
                                 <th>Phone</th>
+                                <th>Email</th>
                                 <th>City</th>
-                                <th>Registered</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
 
-                        <tbody id="customerTable">
+                        <tbody id="supplierTable">
                             <tr>
-                                <td colspan="7" class="loading">Loading customers...</td>
+                                <td colspan="6" class="loading">Loading suppliers...</td>
                             </tr>
                         </tbody>
 
@@ -179,74 +207,7 @@
 
 </div>
 
-
-<!-- CUSTOMER MODAL -->
-<div id="customerModal" class="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h2 id="modalTitle">Add Customer</h2>
-            <button class="close" onclick="closeModal()">&times;</button>
-        </div>
-
-        <form id="customerForm">
-
-            <input type="hidden" id="customerId">
-
-            <div class="form-group">
-                <label for="customerName">Full Name *</label>
-                <input
-                    type="text"
-                    id="customerName"
-                    placeholder="e.g. Priya Sharma"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="e.g. priya@example.com"
-                >
-            </div>
-
-            <div class="form-row">
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input
-                        type="text"
-                        id="phone"
-                        placeholder="e.g. 9876543210"
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input
-                        type="text"
-                        id="city"
-                        placeholder="e.g. Visakhapatnam"
-                    >
-                </div>
-
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="save-btn">Save Customer</button>
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<script src="js/customers.js"></script>
+<script src="js/suppliers.js"></script>
 
 </body>
 </html>
